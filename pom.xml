@@ -57,6 +57,7 @@
         <module>product/features</module>
         <module>product/p2-profile-gen</module>
         <module>product/distribution</module>
+        <module>product/integration</module>
 	</modules>
 
 	<repositories>
@@ -421,6 +422,16 @@
                 <groupId>org.apache.httpcomponents.wso2</groupId>
                 <artifactId>httpcore</artifactId>
                 <version>${orbit.version.httpcore}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.analytics.apim</groupId>
+                <artifactId>org.wso2.analytics.apim.integration.common.clients</artifactId>
+                <version>${das.release.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.analytics.apim</groupId>
+                <artifactId>org.wso2.analytics.apim.integration.common.utils</artifactId>
+                <version>${das.release.version}</version>
             </dependency>
             <dependency>
                 <groupId>libthrift.wso2</groupId>
