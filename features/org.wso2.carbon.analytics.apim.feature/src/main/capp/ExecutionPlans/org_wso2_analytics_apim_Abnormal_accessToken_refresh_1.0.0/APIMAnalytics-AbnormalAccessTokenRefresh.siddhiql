@@ -22,7 +22,7 @@ define table AccessTokenRefreshSummaryTable (userId string, clientId string, sco
 define stream alert_abnormalTokenRefreshStream (user string, clientId string, scope string, timestamp long);
 
 @Export('org.wso2.analytics.apim.allApimAlertsStream:1.0.0')
-define stream alert_allAPIMAlertsStream (type string, msg string);
+define stream alert_allAPIMAlertsStream (type string, msg string, alertTimestamp string);
 
 --- Filter out the successfull token refresh events
 from OAuthStream[grantType == 'refreshToken' and isSuccess == true]
@@ -55,6 +55,6 @@ select userId as user, clientId, scopes as scope, timestamp
 insert into alert_abnormalTokenRefreshStream;
 
 from alert_abnormalTokenRefreshStream
-select "[AbnormalRefreshAlert]" as type, str:concat(' User: ', user, ' ClientID: ', clientId, ' Scopes: ', scope, ' Time: ', timestamp) as msg
+select "[AbnormalRefreshAlert]" as type, str:concat(' User: ', user, ' ClientID: ', clientId, ' Scopes: ', scope, ' Time: ', timestamp) as msg,  (time:currentDate()) as alertTimestamp
 insert into alert_allAPIMAlertsStream;
 
